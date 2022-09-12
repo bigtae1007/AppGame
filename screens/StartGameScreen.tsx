@@ -5,7 +5,15 @@ import PrimaryButton from '../components/PrimaryButton';
 export default function StartGameScreen() {
   return (
     <View style={styles.inputContainer}>
-      <TextInput style={styles.numberInput} maxLength={2} />
+      <TextInput
+        style={styles.numberInput}
+        maxLength={2}
+        keyboardType="number-pad"
+        // 첫글자 대문자
+        autoCapitalize="none"
+        // 자동 수정 등
+        autoCorrect={false}
+      />
       <PrimaryButton>Reset</PrimaryButton>
       <PrimaryButton>Confirm</PrimaryButton>
     </View>
