@@ -1,6 +1,12 @@
 import React from 'react';
-import {TextInput, View, StyleSheet} from 'react-native';
+import {TextInput, View, Button, StyleSheet} from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
+
+// export type Main = {
+//   StartGame: {sort: string} | undefined;
+// };
+// type Bb = NativeStackScreenProps<Main, 'StartGame'>;
+// export default function StartGameScreen({navigation}: Bb) {
 
 export default function StartGameScreen() {
   return (
@@ -16,6 +22,7 @@ export default function StartGameScreen() {
       />
       <View style={styles.containerButton}>
         <View style={styles.bottonBox}>
+          <Button title="move" onPress={() => {}} />
           <PrimaryButton>Reset</PrimaryButton>
         </View>
         <View style={styles.bottonBox}>
