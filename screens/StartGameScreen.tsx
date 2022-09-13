@@ -14,8 +14,14 @@ export default function StartGameScreen() {
         // 자동 수정 등
         autoCorrect={false}
       />
-      <PrimaryButton>Reset</PrimaryButton>
-      <PrimaryButton>Confirm</PrimaryButton>
+      <View style={styles.containerButton}>
+        <View style={styles.bottonBox}>
+          <PrimaryButton>Reset</PrimaryButton>
+        </View>
+        <View style={styles.bottonBox}>
+          <PrimaryButton>Confirm</PrimaryButton>
+        </View>
+      </View>
     </View>
   );
 }
@@ -27,6 +33,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     backgroundColor: '#72063c',
     borderRadius: 8,
+    alignItems: 'center',
     // android 그림자 영역
     elevation: 4,
     // IOS 그림자
@@ -46,5 +53,11 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  containerButton: {
+    flexDirection: 'row',
+  },
+  bottonBox: {
+    flex: 1,
   },
 });
