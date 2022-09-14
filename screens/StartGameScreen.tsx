@@ -1,8 +1,40 @@
-import React from 'react';
-import {TextInput, View, Button, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {TextInput, View, Button, StyleSheet, Alert} from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
 export default function StartGameScreen() {
+  const [enterNumber, setEnterNumber] = useState('');
+
+  const handleNumberInput = (text: string) => {
+    setEnterNumber(text);
+  };
+
+  const resetInput = () => {
+    setEnterNumber('');
+  };
+
+  const handleConfirm = () => {
+    const inputNumber = parseInt(enterNumber);
+    if (isNaN(inputNumber) || inputNumber <= 0 || inputNumber > 99) {
+      Alert.alert('메시지', ' 내용', [
+        {
+          text: 'OK',
+          style: 'destructive',
+          onPress: () => {
+            resetInput();
+          },
+        },
+        {
+          text: 'NO',
+          style: 'cancel',
+          onPress: () => {
+            resetInput();
+          },
+        },
+      ]);
+    }
+  };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -13,13 +45,15 @@ export default function StartGameScreen() {
         autoCapitalize="none"
         // 자동 수정 등
         autoCorrect={false}
+        onChangeText={handleNumberInput}
+        value={enterNumber}
       />
       <View style={styles.containerButton}>
-        <View style={styles.bottonBox}>
+        <View>
           <PrimaryButton>Reset</PrimaryButton>
         </View>
-        <View style={styles.bottonBox}>
-          <PrimaryButton>Confirm</PrimaryButton>
+        <View>
+          <PrimaryButton onPress={handleConfirm}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -56,11 +90,5 @@ const styles = StyleSheet.create({
   },
   containerButton: {
     flexDirection: 'row',
-  },
-  bottonBox: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#ddd',
-    marginHorizontal: 5,
   },
 });
