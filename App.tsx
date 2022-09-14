@@ -1,7 +1,15 @@
-import {StyleSheet, View, ImageBackground} from 'react-native';
+import {useState} from 'react';
+import {StyleSheet, View, ImageBackground, SafeAreaView} from 'react-native';
+import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
 
 const App = () => {
+  const [userNumber, setUserNumber] = useState<null | number>(null);
+
+  const pickNumber = (number: number) => {
+    setUserNumber(number);
+  };
+
   return (
     <View style={styles.rootScreen}>
       <ImageBackground
@@ -11,7 +19,13 @@ const App = () => {
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImg}>
-        <StartGameScreen />
+        <SafeAreaView style={styles.rootScreen}>
+          {userNumber ? (
+            <GameScreen userNumber={userNumber} />
+          ) : (
+            <StartGameScreen pickNumber={pickNumber} />
+          )}
+        </SafeAreaView>
       </ImageBackground>
     </View>
   );
@@ -20,7 +34,6 @@ const App = () => {
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    backgroundColor: '#ddb52f',
   },
   backgroundImg: {
     opacity: 0.3,
