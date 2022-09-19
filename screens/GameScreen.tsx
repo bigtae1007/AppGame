@@ -4,7 +4,23 @@ interface Props {
   userNumber: number;
 }
 
+const generateRandomeBetween = (
+  min: number,
+  max: number,
+  exclude: number,
+): number => {
+  const randomNumber = Math.floor(Math.random() * (max - min) + min);
+  if (randomNumber === exclude) {
+    return generateRandomeBetween(min, max, exclude);
+  } else {
+    return randomNumber;
+  }
+};
+
 export default function GameScreen({userNumber}: Props) {
+  const initialGuess = generateRandomeBetween(1,100,userNumber);
+  const [currentGuess, setCurrentGuess] = useState(initialGuess)
+
   return (
     <View>
       <Text style={styles.title}>Opponent's Guess</Text>
