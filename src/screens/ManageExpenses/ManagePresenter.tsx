@@ -1,7 +1,13 @@
 import {Text} from 'react-native';
+import {ExpenseOutput} from '../../../components/ExpensesOutput/ExpenseOutput';
+import {DUMMY_EXPENSES} from '../../dummy';
 
 const ManagePresenter = () => {
-  return <Text>ManagePresenter</Text>;
+  return (
+    <>
+      <ExpenseOutput expenses={DUMMY_EXPENSES} period="ToTal" />
+    </>
+  );
 };
 
 export default ManagePresenter;
