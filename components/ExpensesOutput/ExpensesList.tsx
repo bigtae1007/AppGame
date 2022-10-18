@@ -3,5 +3,10 @@ import {FlatList, Text} from 'react-native';
 import {ExpenseItem} from './ExpenseItem';
 
 export const ExpensesList = ({expenses}: {expenses: any}) => {
-  return <FlatList data={expenses} renderItem={ExpenseItem} />;
+  return (
+    <FlatList
+      data={expenses}
+      renderItem={({item}) => <ExpenseItem item={item} />}
+    />
+  );
 };

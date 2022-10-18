@@ -1,11 +1,15 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {GlobalStyles} from '../../src/constants/styles';
 import {getFormattedDate} from '../../src/util/date';
 
 export const ExpenseItem = ({item}: {item: any}) => {
+  const navigation = useNavigation<any>();
   return (
-    <Pressable>
+    <Pressable
+      onPress={() => {
+        navigation.navigate('Manage', {id: item.id});
+      }}>
       <View style={styles.container}>
         <View>
           <Text style={styles.desc_text}>{item.description}</Text>

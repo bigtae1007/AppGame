@@ -4,18 +4,20 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import {Pressable} from 'react-native';
 import {GlobalStyles} from '../constants/styles';
 import All from '../screens/AllExpenses';
 import Manage from '../screens/ManageExpenses';
 import Recent from '../screens/RecentExpenses';
+import {HeaderRight} from '../UI/HeaderRight';
 
 type RootStackParamList = {
-  All: undefined;
+  Manage: {id: string} | undefined;
   BottomTab: NativeStackScreenProps<TabParamList>;
 };
 
 type TabParamList = {
-  Manage: undefined;
+  All: undefined;
   Recent: undefined;
 };
 
@@ -25,19 +27,28 @@ const Navigator = () => {
 
   const BottomTab = () => {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({navigation}) => ({
+          headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
+          headerTintColor: 'white',
+          tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
+          tabBarActiveTintColor: GlobalStyles.colors.error50,
+          tabBarInactiveTintColor: 'grey',
+          tabBarInactiveBackgroundColor: GlobalStyles.colors.primary400,
+          headerRight: () => (
+            <HeaderRight
+              onPress={() => {
+                navigation.navigate('Manage');
+              }}
+            />
+          ),
+        })}>
         <Tab.Screen
-          name="Manage"
-          component={Manage}
+          name="All"
+          component={All}
           options={{
-            title: 'Manage Expenses',
-            tabBarLabel: 'Manage',
-            headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
-            headerTintColor: 'white',
-            tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
-            tabBarActiveTintColor: GlobalStyles.colors.error50,
-            tabBarInactiveTintColor: 'grey',
-            tabBarInactiveBackgroundColor: GlobalStyles.colors.primary400,
+            title: 'All Expenses',
+            tabBarLabel: 'All',
           }}
         />
         <Tab.Screen
@@ -46,12 +57,6 @@ const Navigator = () => {
           options={{
             title: 'Recent Expenses',
             tabBarLabel: 'Recent',
-            headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
-            headerTintColor: 'white',
-            tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
-            tabBarActiveTintColor: GlobalStyles.colors.error50,
-            tabBarInactiveTintColor: 'grey',
-            tabBarInactiveBackgroundColor: GlobalStyles.colors.primary400,
           }}
         />
       </Tab.Navigator>
@@ -60,7 +65,13 @@ const Navigator = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomTab" screenOptions={{}}>
+      <Stack.Navigator
+        initialRouteName="BottomTab"
+        screenOptions={{
+          headerTintColor: '#fff',
+          headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
+          headerTitleAlign: 'center',
+        }}>
         <Stack.Screen
           name="BottomTab"
           component={BottomTab}
@@ -68,7 +79,7 @@ const Navigator = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="All" component={All} />
+        <Stack.Screen name="Manage" component={Manage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
