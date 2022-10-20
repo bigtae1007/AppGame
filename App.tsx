@@ -8,6 +8,7 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Navigator from './src/routes/Navigator';
+import ExpenseContextProvider from './src/store/expense-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,7 +16,9 @@ const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Navigator />
+      <ExpenseContextProvider>
+        <Navigator />
+      </ExpenseContextProvider>
     </SafeAreaView>
   );
 };
