@@ -31,8 +31,9 @@ const expensesReducer = (
       });
       return newState;
     case 'DELETE':
-      const deleteStae = state.filter(v => v.id !== action.payload.id);
-      return deleteStae;
+      const deleteState = state.filter(v => v.id !== action.payload);
+      console.log(deleteState);
+      return deleteState;
     default:
       return state;
   }

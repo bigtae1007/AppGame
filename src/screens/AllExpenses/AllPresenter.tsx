@@ -1,10 +1,12 @@
+import {useContext} from 'react';
 import {ExpenseOutput} from '../../../components/ExpensesOutput/ExpenseOutput';
-import {DUMMY_EXPENSES} from '../../dummy';
+import {ExpensesContext} from '../../store/expense-context';
 
 const AllPresenter = () => {
+  const {expenses} = useContext(ExpensesContext);
   return (
     <>
-      <ExpenseOutput expenses={DUMMY_EXPENSES} period="ToTal" />
+      <ExpenseOutput expenses={expenses} period="ToTal" />
     </>
   );
 };

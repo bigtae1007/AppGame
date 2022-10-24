@@ -1,23 +1,20 @@
-import {useLayoutEffect} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import Button from '../../../components/Button';
 import {ExpenseOutput} from '../../../components/ExpensesOutput/ExpenseOutput';
 import {WIDTH} from '../../constants/Device';
 import {GlobalStyles} from '../../constants/styles';
 import {DUMMY_EXPENSES} from '../../dummy';
+import {ExpensesContext} from '../../store/expense-context';
 
-const ManagePresenter = ({
-  id,
-  navigation,
-}: {
-  id: string | undefined;
-  navigation: any;
-}) => {
+const ManagePresenter = ({id, navigation}: {id: string; navigation: any}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: id === undefined ? 'Add Expense' : 'Edit Expense',
     });
   }, [navigation, id]);
+  const {addExpense, deleteExpense, updateExpense, expenses} =
+    useContext(ExpensesContext);
 
   const handleCancle = () => {
     navigation.goBack();
@@ -26,6 +23,7 @@ const ManagePresenter = ({
     navigation.goBack();
   };
   const handleDelete = () => {
+    deleteExpense(id);
     navigation.goBack();
   };
 
