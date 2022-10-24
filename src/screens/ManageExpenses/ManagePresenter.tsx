@@ -6,6 +6,7 @@ import {WIDTH} from '../../constants/Device';
 import {GlobalStyles} from '../../constants/styles';
 import {DUMMY_EXPENSES} from '../../dummy';
 import {ExpensesContext} from '../../store/expense-context';
+import {Form} from './components/Form';
 
 const ManagePresenter = ({id, navigation}: {id: string; navigation: any}) => {
   useLayoutEffect(() => {
@@ -45,6 +46,7 @@ const ManagePresenter = ({id, navigation}: {id: string; navigation: any}) => {
             </View>
           </Pressable>
         </View>
+        <Form />
       </View>
     </>
   );
