@@ -31,22 +31,24 @@ const ManagePresenter = ({id, navigation}: {id: string; navigation: any}) => {
   return (
     <>
       <View style={styles.container}>
+        <Form />
         <View style={styles.btn_container}>
           <Button onPress={handleCancle} flat="ok" style={styles.btn_style}>
             Cancle
           </Button>
           <Button onPress={handleUpdate} style={styles.btn_style}>
-            Update
+            {id !== undefined ? 'Update' : 'Add'}
           </Button>
         </View>
         <View style={styles.del_btn_container}>
-          <Pressable onPress={handleDelete}>
-            <View style={styles.del_btn_view}>
-              <Text style={styles.del_btn_text}>삭제하기</Text>
-            </View>
-          </Pressable>
+          {id !== undefined && (
+            <Pressable onPress={handleDelete}>
+              <View style={styles.del_btn_view}>
+                <Text style={styles.del_btn_text}>삭제하기</Text>
+              </View>
+            </Pressable>
+          )}
         </View>
-        <Form />
       </View>
     </>
   );
