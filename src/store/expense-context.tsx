@@ -4,7 +4,7 @@ import {DUMMY_EXPENSES} from '../dummy';
 export interface IDataDto {
   id: string;
   description: string;
-  amout: number;
+  amount: number;
   date: Date;
 }
 
@@ -23,7 +23,8 @@ const expensesReducer = (
 ) => {
   switch (action.type) {
     case 'ADD':
-      return [...state, {...action.payload}];
+      console.log(action.payload);
+      return [{...action.payload}, ...state];
 
     case 'UPDATE':
       const newState = state.map(v => {
@@ -46,7 +47,7 @@ const ExpenseContextProvider = ({children}: any) => {
     dispatch({type: 'ADD', payload});
   };
   const updateFn = (id: string, payload: IDataDto) => {
-    dispatch({type: 'UPDATE', payload: {id, payload}});
+    dispatch({type: 'UPDATE', payload});
   };
   const deleteFn = (id: string) => {
     dispatch({type: 'DELETE', payload: id});
